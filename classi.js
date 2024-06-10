@@ -38,24 +38,35 @@ class Pet {
     this.breed = breed;
   }
 
-  compareOwner(pet) {
-    if (this.ownerName === pet.ownerName) return "They have the same name";
+  getPet() {
+    return `${this.petName} is a ${this.breed} ${this.species} owned by ${this.ownerName}`;
+  }
+  compareOwner(petOwner) {
+    if (this.ownerName === petOwner.ownerName) return "They have the same name";
     else return "The owner's name is different";
   }
 }
 
 const form = document.querySelector("form");
-
+let pets = [];
 form.onsubmit = function (e) {
   e.preventDefault();
   const petName = document.querySelector("#petName").value;
-  const ownertName = document.querySelector("#ownerName").value;
+  const ownerName = document.querySelector("#ownerName").value;
   const species = document.querySelector("#species").value;
   const breed = document.querySelector("#breed").value;
 
-  const pet1 = new Pet(petName, ownerName, species, breed);
-  //   const pets = [];
-  //   pets.push(pet1);
-  //   console.log(pets);
-  console.log(pet1);
+  let pet = new Pet(petName, ownerName, species, breed);
+  pets.push(pet);
+  console.log(pets);
+
+  const listContainer = document.querySelector("#petList");
+  pets.forEach((p) => {
+    listContainer.innerHTML = `<ul>
+<li><p>Pet Name: ${petName}</p></li>
+<li><p>Owner Name: ${ownerName}</p></li>
+<li><p>Species: ${species}</p></li>
+<li><p>Breed: ${breed}</p></li>
+</ul>`;
+  });
 };
