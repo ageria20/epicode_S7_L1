@@ -59,14 +59,19 @@ form.onsubmit = function (e) {
   let pet = new Pet(petName, ownerName, species, breed);
   pets.push(pet);
   console.log(pets);
+  pets.forEach((p) => {
+    if (pet.compareOwner(p)) console.log("Hanno lo stesso nome");
+    else console.log("Non hanno lo stesso nome");
+  });
 
   const listContainer = document.querySelector("#petList");
-  pets.forEach((p) => {
-    listContainer.innerHTML = `<ul>
-<li><p>Pet Name: ${petName}</p></li>
-<li><p>Owner Name: ${ownerName}</p></li>
-<li><p>Species: ${species}</p></li>
-<li><p>Breed: ${breed}</p></li>
-</ul>`;
-  });
+
+  const list = document.createElement("ul");
+  listContainer.appendChild(list);
+  list.innerHTML = `
+<li><p>Pet Name: ${pet.petName}</p></li>
+<li><p>Owner Name: ${pet.ownerName}</p></li>
+<li><pSpecies: ${pet.species}</p></li>
+<li><p>Breed: ${pet.breed}</p></li>
+`;
 };
